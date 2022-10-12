@@ -26,7 +26,7 @@ namespace snake_game
             do
             {
                 Player player = players[turn];
-                player.playRound();
+                player.PlayRound();
                 if (player.score > 50)
                     player.score = 25;
 

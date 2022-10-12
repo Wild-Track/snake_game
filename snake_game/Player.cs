@@ -20,13 +20,13 @@ namespace snake_game
         }
 
         // Calculate new score of player
-        public void playRound()
+        public void PlayRound()
         {
             score += rnd.Next(1, 7);
-            printRound();
+            PrintRound();
         }
 
-        public void printRound()
+        public void PrintRound()
         {
             Console.WriteLine("Joueur : " + name + " son score est : " + score);
         }

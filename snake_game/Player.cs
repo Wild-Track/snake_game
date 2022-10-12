@@ -22,6 +22,7 @@ namespace snake_game
         // Calculate new score of player
         public void PlayRound()
         {
+            this.rnd = new Random();
             score += rnd.Next(1, 7);
             PrintRound();
         }

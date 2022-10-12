@@ -10,14 +10,16 @@ namespace snake_game
     {
         public Player[] players { get; set; }
         // Turn of player, can be 0 or 1
-        public int turn;
+        public int playerTurn;
+        public Boolean gameEnded = false;
+        public Player? winner = null;
 
         public Game(Player p1, Player p2)
         {
             players = new Player[2];
             this.players[0] = p1;
             this.players[1] = p2;
-            this.turn = 0;
+            this.playerTurn = 0;
         }
 
         public void LoopGame()
@@ -25,16 +27,23 @@ namespace snake_game
             // Loop of the game
             do
             {
-                Player player = players[turn];
+                Player player = players[playerTurn];
                 player.PlayRound();
                 if (player.score > 50)
                     player.score = 25;
 
-                // Change turn
-                turn = (turn + 1) % 2;
-            } while (players[turn].score != 50);
+                gameEnded = player.score == 50 ? true : false;
 
-            Console.WriteLine("Le joueur : " + players[(turn + 1) % 2].name + " à gagné");
+                if (gameEnded)
+                    winner = player;
+                else 
+                    // Change playerTurn
+                    playerTurn = (playerTurn + 1) % 2;
+
+            } while (!gameEnded);
+
+            Console.WriteLine("Le joueur : " + winner.name + " à gagné");
         }
+
     }
 }

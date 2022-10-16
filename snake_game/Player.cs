@@ -1,35 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace snake_game
+﻿
+namespace Snake
 {
     public class Player
     {
-        public string name { get; }
-        public int score { get; set; }
-        private Random rnd;
+        public string name;
+        public int score;
+        public Dice dice;
 
         public Player(string name)
         {
-            this.rnd = new Random();
+            if (name == null)
+                throw new ArgumentNullException("name is null");
             this.name = name;
             this.score = 0;
+            this.dice = new Dice(1, 7);
         }
 
         // Calculate new score of player
         public void PlayRound()
         {
-            this.rnd = new Random();
-            score += rnd.Next(1, 7);
-            PrintRound();
+            score += dice.RollDice();
+
+            Console.WriteLine(RoundToString());
         }
 
-        public void PrintRound()
+        public string RoundToString()
         {
-            Console.WriteLine("Joueur : " + name + " son score est : " + score);
+            return "Joueur : " + name + " son score est : " + score;
         }
     }
 }
